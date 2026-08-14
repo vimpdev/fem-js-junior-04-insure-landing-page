@@ -1,0 +1,52 @@
+@layer tokens {
+
+  :root {
+    /* PRIMITIVE TOKENS */
+    --clr-blue-950: hsl(256, 26%, 20%);
+    --clr-blue-500: hsl(216, 30%, 68%);
+    --clr-gray-950: hsl(270, 9%, 17%);
+    --clr-gray-700: hsl(273, 4%, 51%);
+    --clr-gray-200: hsl(0, 0%, 85%);
+    --clr-gray-50: hsl(0, 0%, 98%);
+    --clr-pink-400: hsl(296, 30%, 68%);
+    --clr-purple-500: hsl(250, 30%, 68%);
+    --clr-white: hsl(0, 100%, 100%);
+    --clr-black: hsl(0, 0%, 0%);
+
+    /* SEMANTIC TOKENS */
+    --clr-text-primary: var(--clr-gray-950);
+    --clr-text-secondary: var(--clr-gray-700);
+    --clr-text-inverse: var(--clr-white);
+
+    --clr-surface-page: var(--clr-white);
+    --clr-surface-brand: var(--clr-blue-950);
+    --clr-surface-footer: var(--clr-gray-50);
+
+    --clr-border-subtle: var(--clr-gray-200);
+    --clr-border-brand: var(--clr-blue-950);
+    --clr-border-accent: var(--clr-pink-400);
+
+    --clr-action-primary-bg: var(--clr-blue-500);
+    --clr-action-primary-text: var(--clr-white);
+
+    --clr-action-primary-hover-bg: var(--clr-gray-950);
+    --clr-action-primary-hover-text: var(--clr-white);
+
+    --ff-primary: 'Karla', system-ui, sans-serif;
+    --ff-secondary: 'DM Serif Display', system-ui, sans-serif;
+
+    --fs-100: 0.8125rem;
+    --fs-200: 1rem;
+    --fs-300: 1.25rem;
+    --fs-400: 1.75rem;
+    --fs-500: 2.5rem;
+    --fs-600: 3rem;
+    --fs-700: 3.5rem;
+    --fs-800: 4.5rem;
+
+    --fw-regular: 400;
+    --fw-bold: 700;
+
+    --transition-fast: .25s ease-out;
+  }
+}
