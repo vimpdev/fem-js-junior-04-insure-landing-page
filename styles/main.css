@@ -1,4 +1,4 @@
-@layer reset, fonts, tokens, base, layout, components, utilities;
+@layer reset, fonts, tokens, base, layout, components, utilities, responsive;
 
 @import url('./reset.css') layer(reset);
 @import url('./fonts.css') layer(fonts);
@@ -7,19 +7,186 @@
 @layer base {
 
   body {
-    font-family: var(--ff-primary);
-    font-size: var(--fs-200);
-    font-weight: var(--fw-regular);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-200);
+    background-color: var(--color-bg-page);
+    color: var(--color-text-primary);
   }
 
   :focus-visible {
-    outline: 2px solid var(--clr-focus, currentColor);
+    outline: 2px solid var(--color-focus-ring, Highlight);
     outline-offset: 3px;
   }
 }
 
-@layer layout {}
+@layer layout {
 
-@layer components {}
+  /* ****** */
+  /* HEADER */
+  /* ****** */
+  .header {
+    --height-header: 5rem;
 
-@layer utilities {}
+    position: relative;
+    padding-block: var(--space-300);
+  }
+
+  .header__inner {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* ****** */
+  /* MAIN */
+  /* ****** */
+
+  /* ****** */
+  /* FOOTER */
+  /* ****** */
+}
+
+@layer components {
+
+  .container {
+    --max-width: 45rem;
+    inline-size: min(calc(100% - var(--space-600)), var(--max-width));
+    margin-inline: auto;
+  }
+
+  /* ************* */
+  /* Toggle Button */
+  /* ************* */
+  .toggle-btn {
+    position: relative;
+    inline-size: 2rem;
+    block-size: 2rem;
+    display: grid;
+    place-items: center;
+    border: 1.5px solid currentColor;
+
+    svg {
+      position: absolute;
+    }
+  }
+
+  .toggle-btn__icon-close {
+    opacity: 0;
+  }
+
+  /* ***************** */
+  /* Header Navigation */
+  /* ***************** */
+  .header__nav {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 100%;
+
+    padding: var(--space-500) var(--space-300);
+    block-size: calc(100dvh - var(--height-header));
+    background: var(--color-bg-header-menu) url('../assets/images/patterns/mobile-nav.svg') no-repeat center bottom;
+    background-size: 100% 13.625rem;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
+    pointer-events: none;
+  }
+
+  .header__menu {
+    --stack-space: var(--space-300);
+
+    max-inline-size: 20.4375rem;
+    margin-inline: auto;
+  }
+
+  .header__menu-link {
+    display: block;
+    font-size: var(--font-size-300);
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: var(--font-weight-bold);
+    line-height: 2;
+    letter-spacing: 0.116em;
+    color: var(--color-text-inverse);
+  }
+
+  .header__menu-link--cta {
+    border: 1.5px solid currentColor;
+  }
+}
+
+@layer utilities {
+
+  .cluster {
+    display: flex;
+    flex-direction: row;
+    gap: var(--cluster-space, 1rem);
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-space, 1rem);
+  }
+}
+
+@layer responsive {
+
+  @media (width >=48rem) {
+
+    /* ****** */
+    /* HEADER */
+    /* ****** */
+    .header__nav {
+      background-image: url('../assets/images/patterns/tablet-nav.svg');
+    }
+  }
+
+  @media (width>=70rem) {
+    .container {
+      --max-width: 69.375rem;
+    }
+
+    /* ****** */
+    /* HEADER */
+    /* ****** */
+    .header {
+      padding-block: 1.25rem;
+    }
+
+    .toggle-btn {
+      display: none;
+    }
+
+    .header__nav {
+      position: static;
+      inset-inline-start: auto;
+      inset-inline-end: auto;
+      inset-block-start: auto;
+      padding: var(--space-0);
+      block-size: auto;
+      background: none;
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .header__menu {
+      flex-direction: row;
+      max-inline-size: none;
+      margin-inline: unset;
+    }
+
+    .header__menu-link {
+      padding-block: 0.722rem;
+      font-size: var(--font-size-100);
+      color: var(--color-text-secondary);
+      line-height: 1.15;
+    }
+
+    .header__menu-link--cta {
+      padding-inline: 1.697rem;
+      color: var(--color-text-primary);
+    }
+  }
+}

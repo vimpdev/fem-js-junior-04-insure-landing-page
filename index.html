@@ -17,23 +17,23 @@
 <body>
 
   <header class="header">
-    <div class="header__inner container">
-      <a href="index.html" class="header__logo">
+    <div class="header__inner container cluster">
+      <a href="index.html" class="logo">
         <img src="./assets/images/logo.svg" alt="Insure">
       </a>
 
-      <button type="button" class="menu-toggle" aria-controls="primary-nav" aria-expanded="false"
-        aria-label="Open menu">
-        <svg class="menu-toggle__icon" aria-hidden="true">
+      <button type="button" class="toggle-btn" aria-controls="primary-nav" aria-expanded="false"
+        aria-label="Toggle navigation menu">
+        <svg class="toggle-btn__icon-open" aria-hidden="true">
           <use href="./assets/images/sprites/ui.svg#bars"></use>
         </svg>
-        <svg class="menu-toggle__icon" aria-hidden="true">
+        <svg class="toggle-btn__icon-close" aria-hidden="true">
           <use href="./assets/images/sprites/ui.svg#close"></use>
         </svg>
       </button>
 
       <nav class="header__nav" id="primary-nav" aria-label="Primary">
-        <ul class="header__menu">
+        <ul class="header__menu stack">
           <li><a href="#" class="header__menu-link">How we work</a></li>
           <li><a href="#" class="header__menu-link">Blog</a></li>
           <li><a href="#" class="header__menu-link">Account</a></li>
@@ -49,8 +49,7 @@
         <div class="hero__content">
           <h1 class="hero__title">Humanizing your insurance.</h1>
           <p class="hero__description">Get your life insurance coverage easier and faster. We blend our expertise and
-            technology to help you find
-            the plan that’s right for you. Ensure you and your loved ones are protected.</p>
+            technology to help you find the plan that’s right for you. Ensure you and your loved ones are protected.</p>
           <a href="#" class="button">View plans</a>
         </div>
 
@@ -67,26 +66,24 @@
         <h2 class="features__title">We’re different</h2>
 
         <ul class="features__list">
-          <li class="features__item">
-            <img src="./assets/images/features/snappy-process.svg" alt="" class="features__item-icon">
-            <h3 class="features__item-title">Snappy Process</h3>
-            <p class="features__item-description">Our application process can be completed in minutes, not hours. Don’t
+          <li class="feature">
+            <img src="./assets/images/features/snappy-process.svg" alt="" class="feature__icon">
+            <h3 class="feature__title">Snappy Process</h3>
+            <p class="feature__description">Our application process can be completed in minutes, not hours. Don’t
               get stuck filling in tedious forms.
             </p>
           </li>
-          <li class="features__item">
-            <img src="./assets/images/features/affordable-prices.svg" alt="" class="features__item-icon">
-            <h3 class="features__item-title">Affordable Prices</h3>
-            <p class="features__item-description">We don’t want you worrying about high monthly costs. Our prices may be
-              low, but we still offer the best
-              coverage possible.</p>
+          <li class="feature">
+            <img src="./assets/images/features/affordable-prices.svg" alt="" class="feature__icon">
+            <h3 class="feature__title">Affordable Prices</h3>
+            <p class="feature__description">We don’t want you worrying about high monthly costs. Our prices may be
+              low, but we still offer the best coverage possible.</p>
           </li>
-          <li class="features__item">
-            <img src="./assets/images/features/people-first.svg" alt="" class="features__item-icon">
-            <h3 class="features__item-title">People First</h3>
-            <p class="features__item-description">Our plans aren’t full of conditions and clauses to prevent payouts. We
-              make sure you’re covered when you
-              need it.</p>
+          <li class="feature">
+            <img src="./assets/images/features/people-first.svg" alt="" class="feature__icon">
+            <h3 class="feature__title">People First</h3>
+            <p class="feature__description">Our plans aren’t full of conditions and clauses to prevent payouts. We
+              make sure you’re covered when you need it.</p>
           </li>
         </ul>
       </div>
@@ -103,7 +100,7 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__top">
-        <a href="index.html" class="footer__logo">
+        <a href="index.html" class="logo">
           <img src="./assets/images/logo.svg" alt="Insure">
         </a>
 
