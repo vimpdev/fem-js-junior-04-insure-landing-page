@@ -30,6 +30,21 @@
 
 @layer components {
 
+  /* Overlay */
+  body.is-menu-open main,
+  body.is-menu-open footer {
+    position: relative;
+    isolation: isolate;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--color-overlay);
+      z-index: 1;
+    }
+  }
+
   /* Header */
   .header {
     --height-header: 5rem;
@@ -52,13 +67,30 @@
 
     padding: var(--space-500) var(--space-300);
     block-size: calc(100dvh - var(--height-header));
-    background: var(--color-surface-navigation) url('../assets/images/patterns/mobile-nav.svg') no-repeat center bottom;
-    background-size: 100% 13.625rem;
+    background-color: var(--color-surface-navigation);
     opacity: 0;
     transform: scaleY(0);
     transform-origin: top;
     transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
-    pointer-events: none;
+    overflow: clip;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-inline-start: 0;
+      inset-block-end: 0;
+      inline-size: 881px;
+      block-size: 820px;
+      background: url('../assets/images/patterns/pattern-menu.svg');
+      background-size: cover;
+      translate: -12% 74%;
+      pointer-events: none;
+    }
+  }
+
+  .header__nav.is-open {
+    opacity: 1;
+    transform: scaleY(1);
   }
 
   .header__menu {
@@ -94,11 +126,28 @@
 
     svg {
       position: absolute;
+      inline-size: 100%;
+      block-size: 100%;
     }
   }
 
   .toggle-btn__icon-close {
     opacity: 0;
+    transition: transform var(--transition-fast);
+  }
+
+  .toggle-btn__icon-open {
+    transition: transform var(--transition-fast);
+  }
+
+  .toggle-btn.is-open .toggle-btn__icon-open {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+
+  .toggle-btn.is-open .toggle-btn__icon-close {
+    transform: rotate(-90deg);
+    opacity: 1;
   }
 
 
@@ -397,7 +446,7 @@
     position: absolute;
     inset-inline-start: 50%;
     inset-block-end: 0;
-    inline-size: 100%;
+    inline-size: max-content;
     font-size: var(--font-size-100);
     text-align: center;
     color: var(--color-text-brand);
@@ -443,8 +492,9 @@
 
   @media (width >=48rem) {
 
-    .header__nav {
-      background-image: url('../assets/images/patterns/tablet-nav.svg');
+    .header__nav::after {
+      inset-inline-start: 50%;
+      translate: -50% 73%;
     }
 
 
@@ -534,6 +584,10 @@
       opacity: 1;
       transform: none;
       transition: none;
+
+      &::after {
+        content: none;
+      }
     }
 
     .header__menu {

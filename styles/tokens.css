@@ -34,6 +34,7 @@
     --color-surface-navigation: var(--color-gray-950);
     --color-surface-brand: var(--color-blue-950);
     --color-surface-footer: var(--color-gray-50);
+    --color-overlay: color-mix(in srgb, var(--color-blue-950) 80%, transparent);
 
     --color-border-subtle: var(--color-gray-200);
     --color-border-brand: var(--color-blue-950);
@@ -44,6 +45,8 @@
 
     --color-bg-hover-action: var(--color-gray-950);
     --color-text-hover-action: var(--color-white);
+
+    --color-focus-ring: var(--color-white);
 
     /* OTHER TOKENS */
     --font-family-primary: 'Karla', system-ui, sans-serif;
