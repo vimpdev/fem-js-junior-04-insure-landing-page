@@ -40,13 +40,8 @@
     --color-border-brand: var(--color-blue-950);
     --color-border-accent: var(--color-pink-400);
 
-    --color-bg-action: var(--color-blue-500);
-    --color-text-action: var(--color-white);
-
-    --color-bg-hover-action: var(--color-gray-950);
-    --color-text-hover-action: var(--color-white);
-
-    --color-focus-ring: var(--color-white);
+    --color-text-hover-action: var(--color-gray-950);
+    --color-surface-hover-action: var(--color-white);
 
     /* OTHER TOKENS */
     --font-family-primary: 'Karla', system-ui, sans-serif;

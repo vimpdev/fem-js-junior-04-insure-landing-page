@@ -1,4 +1,4 @@
-@layer reset, fonts, tokens, base, layout, components, utilities, responsive;
+@layer reset, fonts, tokens, base, layout, components, utilities, responsive, states;
 
 @import url('./reset.css') layer(reset);
 @import url('./fonts.css') layer(fonts);
@@ -14,7 +14,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-focus-ring);
+    outline: 2px solid currentColor;
     outline-offset: 3px;
   }
 }
@@ -48,7 +48,6 @@
   /* Header */
   .header {
     --height-header: 5rem;
-
     position: relative;
     padding-block: var(--space-300);
     background-color: var(--color-surface-page);
@@ -95,7 +94,6 @@
 
   .header__menu {
     --stack-space: var(--space-300);
-
     max-inline-size: 20.4375rem;
     margin-inline: auto;
   }
@@ -109,10 +107,30 @@
     letter-spacing: 0.116em;
     line-height: 2;
     color: var(--color-text-inverse);
+    transition: color var(--transition-fast);
+  }
+
+  .underline-link {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-inline-start: 0;
+      inset-block-end: -2px;
+
+      inline-size: 100%;
+      block-size: 2px;
+      background-color: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition-fast);
+    }
   }
 
   .header__menu-link--cta {
     border: 1.5px solid currentColor;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
   }
 
   /* Toggle Button */
@@ -196,7 +214,6 @@
 
   .hero__content {
     --stack-space: var(--space-400);
-
     block-size: var(--height-hero-content);
     order: 1;
     align-items: center;
@@ -224,7 +241,6 @@
   .hero__media {
     --width-media: 23.4375rem;
     --height-media: 28.1875rem;
-
     inline-size: var(--width-media);
     block-size: var(--height-media);
     max-inline-size: none;
@@ -246,6 +262,7 @@
     background-color: transparent;
     border: 1.5px solid currentColor;
     color: var(--color-text-inverse);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
   }
 
 
@@ -404,6 +421,7 @@
     display: grid;
     place-items: center;
     color: var(--color-text-secondary);
+    transition: color var(--transition-fast);
   }
 
   .social__icon {
@@ -465,7 +483,7 @@
         block-size: 0.125rem;
         background-color: currentColor;
         transform: scaleX(1);
-        transform-origin: center;
+        transform-origin: left;
         transition: transform var(--transition-fast);
         pointer-events: none;
       }
@@ -579,6 +597,7 @@
       inset-block-start: auto;
 
       padding: var(--space-0);
+      padding-inline-start: var(--space-100);
       block-size: auto;
       background: none;
       opacity: 1;
@@ -592,18 +611,19 @@
 
     .header__menu {
       flex-direction: row;
+      align-items: center;
       max-inline-size: none;
       margin-inline: unset;
     }
 
     .header__menu-link {
-      padding-block: 0.722rem;
       font-size: var(--font-size-100);
       color: var(--color-text-secondary);
       line-height: 1.15;
     }
 
     .header__menu-link--cta {
+      padding-block: 0.722rem;
       padding-inline: 1.697rem;
       color: var(--color-text-primary);
     }
@@ -772,5 +792,52 @@
     .footer__nav-list {
       --stack-space: 0.875rem;
     }
+  }
+}
+
+@layer states {
+
+  @media (hover: hover) {
+    .underline-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    .header__menu-link:hover {
+      color: var(--color-text-primary);
+    }
+
+    .header__menu-link--cta:hover {
+      background-color: var(--color-surface-navigation);
+      color: var(--color-text-inverse);
+    }
+
+    .button:hover {
+      background-color: var(--color-surface-hover-action);
+      color: var(--color-text-hover-action);
+    }
+
+    .social__link:hover {
+      color: var(--color-text-hover-action);
+    }
+
+    .attribution a:hover::after {
+      transform: scaleX(0);
+    }
+  }
+
+  .header__menu-link--cta:focus-visible {
+    outline: none;
+    background-color: var(--color-surface-navigation);
+    color: var(--color-text-inverse);
+  }
+
+  .button:focus-visible {
+    outline: none;
+    background-color: var(--color-surface-hover-action);
+    color: var(--color-text-hover-action);
+  }
+
+  .attribution a:focus-visible::after {
+    transform: scaleX(0);
   }
 }
