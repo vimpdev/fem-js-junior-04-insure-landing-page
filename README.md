@@ -1,122 +1,194 @@
-# Frontend Mentor - Insure landing page solution
+# Insure Landing Page
 
-This is a solution to the [Insure landing page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/insure-landing-page-uTU68JV8). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+![HTML](https://img.shields.io/badge/HTML-5-E34F26?logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-000000?logo=javascript&logoColor=F7DF1E)
+![Responsive](https://img.shields.io/badge/Responsive-Mobile--First-5C6BC0)
+![Status](https://img.shields.io/badge/status-live-2ea44f)
 
-## Table of contents
+![](./docs/previews/github-preview.png)
 
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
-  - [AI Collaboration](#ai-collaboration)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
+Responsive insurance landing page built with semantic HTML, modern CSS, and vanilla JavaScript. The project includes accessible mobile navigation, responsive layouts, and keyboard support.
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
+---
 
-## Overview
+## Links
 
-### The challenge
+- [**Live Preview**](https://vimpdev.github.io/fem-js-junior-04-insure-landing-page/)
+<!-- - [**Frontend Mentor Solution**]() -->
 
-Users should be able to:
+---
 
-- View the optimal layout for the site depending on their device's screen size
-- See hover states for all interactive elements on the page
+## Demo
 
-### Screenshot
+![](./docs/demo.gif)
 
-![](./screenshot.jpg)
+---
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
+## Screenshots
 
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
+### Mobile
 
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
+| Default | Default | Menu |
+| --- | --- | --- |
+| ![](./docs/screenshots/mobile-default-1.avif) | ![](./docs/screenshots/mobile-default-2.avif) | ![](./docs/screenshots/mobile-menu.avif) |
 
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+### Tablet
 
-### Links
+| Default | Menu |
+| --- | --- |
+| ![](./docs/screenshots/tablet-default.avif) | ![](./docs/screenshots/tablet-menu.avif) |
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+### Desktop
 
-## My process
+| Default | Hover | Focus |
+| --- | --- | --- |
+| ![](./docs/screenshots/desktop-default.avif) | ![](./docs/screenshots/desktop-hover.avif) | ![](./docs/screenshots/desktop-focus.avif) |
 
-### Built with
+---
 
-- Semantic HTML5 markup
-- CSS custom properties
+## Highlights
+
+- **Responsive navigation**: Mobile and tablet use a collapsible navigation controlled by a button, while desktop exposes the navigation permanently.
+- **Keyboard accessibility**: The mobile menu supports keyboard interaction, including `Escape` to close it, with clear `:focus-visible` states across the page.
+- **Responsive image art direction**: `<picture>` is used to serve different hero images for mobile, tablet, and desktop.
+- **CSS-driven UI states**: JavaScript manages application state while CSS handles the visual presentation of those states.
+- **Responsive layout**: The page uses Flexbox, Grid, fluid sizing, logical properties, and breakpoint-specific layout changes.
+
+---
+
+## Technical Decisions
+
+### Semantic HTML
+
+The page uses semantic landmarks and native elements such as `header`, `nav`, `main`, `section`, `footer`, lists, headings, links, and buttons. Native HTML behavior is preferred over unnecessary ARIA.
+
+### Mobile navigation state
+
+The mobile navigation uses `isMenuOpen` as its internal state. This state is reflected through:
+
+- `aria-expanded` on the toggle button.
+- `.is-open` classes used by CSS.
+- `inert` on the navigation and page content.
+- The overlay state on `body`.
+
+The resulting state model is:
+
+| Context       | `isMenuOpen` | `aria-expanded` | `nav.inert` | `main.inert` | `footer.inert` |
+| -------------- | -----------: | --------------- | ----------: | -----------: | -------------: |
+| Mobile closed  |      `false` | `false`         |      `true` |      `false` |        `false` |
+| Mobile open    |       `true` | `true`          |     `false` |       `true` |         `true` |
+| Desktop        |      `false` | `false`         |     `false` |      `false` |        `false` |
+
+### Responsive breakpoint detection
+
+`window.matchMedia()` is used to detect the desktop breakpoint in JavaScript and keep the navigation state synchronized when the viewport crosses that breakpoint.
+
+### CSS architecture
+
+Cascade Layers separate reset, fonts, tokens, base styles, layout primitives, components, utilities, responsive rules, and interaction states.
+
+### Image and decorative assets
+
+Decorative artwork is implemented with pseudo-elements so it remains separate from the semantic content. The hero uses `<picture>` to switch between different image compositions based on viewport size.
+
+---
+
+## What I Learned
+
+### `window.matchMedia()`
+
+`window.matchMedia()` allows JavaScript to evaluate a media query and determine whether it currently matches the viewport. It is useful when JavaScript behavior needs to react to the same responsive conditions used by CSS.
+
+### UI state synchronization
+
+An interactive component can have several representations of the same state. In this project, `isMenuOpen` acts as the internal state, while `aria-expanded`, CSS classes, inert, and the overlay reflect that state in different parts of the interface.
+
+#### `inert`
+
+The `inert` attribute prevents a section of the document from receiving focus or user interaction. It is used to keep the closed navigation and the page content inaccessible while the mobile menu is open.
+
+#### `:focus-visible`
+
+`:focus-visible` provides focus styling when the browser determines that a visible focus indicator is appropriate. It improves keyboard navigation without forcing the same focus treatment for every pointer interaction.
+
+### CSS Cascade Layers
+
+`@layer` provides explicit control over the order in which groups of CSS rules participate in the cascade. I used layers to separate global styles, components, utilities, responsive rules, and interaction states.
+
+### Native CSS Nesting
+
+CSS nesting allows related selectors to be grouped inside their parent rule using native CSS, keeping component styles closer together.
+
+### Logical Properties
+
+Properties such as `inline-size`, `block-size`, `margin-inline`, and `inset-inline` describe layout in terms of writing direction instead of physical left, right, top, or bottom values.
+
+### Responsive design
+
+Responsive design is more than adding breakpoints. The layout changes according to the content and composition required at different viewport sizes, using Flexbox, Grid, fluid sizing, and media queries.
+
+### Debugging responsive behavior
+
+Testing on a real mobile device revealed horizontal overflow and responsive issues that were not obvious from the desktop reference. Isolating the affected element before changing global styles helped keep those fixes local to the component.
+
+---
+
+## Tech Stack
+
+### HTML
+
+- Semantic HTML
+- Accessible landmarks
+- Native interactive elements
+- `<picture>` for responsive image art direction
+
+### CSS
+
 - Flexbox
 - CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- Cascade Layers
+- Custom properties
+- Native CSS Nesting
+- Logical properties
+- `min()`
+- `text-wrap: balance`
+- Responsive media queries
+- `:focus-visible`
+- `prefers-reduced-motion`
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+### JavaScript
 
-### What I learned
+- ES modules
+- DOM API
+- Event handling
+- `window.matchMedia()`
+- UI state management
+- `inert`
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+### Tooling
 
-To see how you can add code snippets, see below:
+- pnpm
+- Servor
+- Git
+- GitHub Pages
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
+---
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+## AI Collaboration
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+AI was used as a technical mentor and review partner during the project, mainly for architecture discussions, accessibility, responsive behavior, debugging, naming, and code review.
 
-### Continued development
+The implementation, testing, and final technical decisions were carried out during the development process.
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
-
-### Useful resources
-
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
-
-### AI Collaboration
-
-Describe how you used AI tools (if any) during this project. This helps demonstrate your ability to work effectively with AI assistants.
-
-- What tools did you use (e.g., ChatGPT, Claude, GitHub Copilot)?
-- How did you use them (e.g., debugging, generating boilerplate, brainstorming solutions)?
-- What worked well? What didn't?
-
-**Note: Delete this note and the content above if you didn't use AI, or replace with your own experience.**
+---
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Frontend Mentor – [@vimpdev](https://www.frontendmentor.io/profile/vimpdev)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+---
 
-## Acknowledgments
+## Challenge Source
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+Built as a solution to the [Insure landing page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/insure-landing-page-uTU68JV8).
