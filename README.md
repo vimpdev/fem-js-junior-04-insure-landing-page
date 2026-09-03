@@ -15,7 +15,7 @@ Responsive insurance landing page built with semantic HTML, modern CSS, and vani
 ## Links
 
 - [**Live Preview**](https://vimpdev.github.io/fem-js-junior-04-insure-landing-page/)
-<!-- - [**Frontend Mentor Solution**]() -->
+- [**Frontend Mentor Solution**](https://www.frontendmentor.io/solutions/insure-landing-page-responsive-design-and-accessible-navigation-l6x7ewO2X5)
 
 ---
 
